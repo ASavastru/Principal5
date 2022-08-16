@@ -17,14 +17,16 @@ session_start();
 
 /* Load environment variables */
 try {
-    $dotenv = Dotenv\Dotenv::createUnsafeImmutable(base_path())->load();
+    $dotenv = Dotenv\Dotenv::createUnsafeImmutable(base_path())->load(); //#1 ce face linia asta ca nu pricep?
 } catch (InvalidPathException $exception) {
-    die($exception->getMessage());
+    die($exception->getMessage()); //#2 nu imi dau seama cum sa urmaresc getMessage ca ma duce pe peste tot
 }
 
 /* Container setup, Autowire & Service Providers */
 $container = (new Container)
     ->delegate(new ReflectionContainer)
+    //#3 delegate? Line 147 din container.php. Creeaza un nou obiect '$container' de tip ContainerInterface sau
+    // il primeste prin referinta? e confusing bucata asta de cod
     ->addServiceProvider(new ConfigServiceProvider());
 
 foreach ($container->get(Config::class)->get('app.providers') as $provider) {
