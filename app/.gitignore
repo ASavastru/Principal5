@@ -1,4 +1,5 @@
 .env
 /vendor
+/Scratch
 /storage/cache/views/*
 !/storage/cache/views/.gitkeep

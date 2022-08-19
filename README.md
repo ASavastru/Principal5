@@ -1,7 +1,9 @@
 # Principal Projects - 5Th Week
 
-Commit #2: 
-    - Added confused comments in /app/bootstrap/app.php
-    - Changed some ports in docker-compose.yml
-    - Stumbled into making /app/app/Entities/Location.php based on /app/app/Entities/User.php
-      Not yet aware of how dumb or smart this might be but whatever
+Commit #4:
+    - added password validation on register:
+            - must be at least 8 characters (DONE)
+            - must be a mix of lowercase and UPPERCASE (DONE)
+            - must be alphanumeric (DONE)
+            - must include at least one special character (DONE)
+            - must not include separate first name and last name or their reversed forms (DONE)

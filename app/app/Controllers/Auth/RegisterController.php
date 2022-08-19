@@ -56,11 +56,13 @@ class RegisterController extends Controller
 
     private function validateRegistration(ServerRequestInterface $request): array
     {
+        $splitName = explode(' ', $request->getParsedBody()['name'],PHP_INT_MAX);
         return $this->validate($request, [
             'email' => ['required', 'email', ['exists', User::class]],
             'name' => ['required'],
-            'password' => ['required'],
+            'password' => ['required', ['lengthMIN', 8], ['password', $splitName[0], $splitName[1]]],
             'password_confirmation' => ['required', ['equals', 'password']]
         ]);
     }
 }
+
