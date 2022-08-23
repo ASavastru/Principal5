@@ -85,6 +85,7 @@ function load() {
         // adds day number to div
 
         const dayString = `${i - paddingDays}/${month + 1}/${year}`;
+        const momentDayString = `${year}-${month+1}-${i - paddingDays}`;
 
         if (i > paddingDays) {
             // logic that determines if
@@ -114,8 +115,12 @@ function load() {
             // if there is one,
             // shows appointment
 
-            daySquare.addEventListener('click', () =>
-                openModal(dayString));
+            daySquare.addEventListener('click', () => {
+                // openModal(dayString))
+                let x = moment(momentDayString).format('YYYY-MM-DD');
+                document.getElementById('insertedDate').value = x;
+                document.getElementById('getDataFromDatabase').submit();
+            });
             // listens for clicks on each div
             // and calls openModal for the specific date clicked
 

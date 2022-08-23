@@ -60,7 +60,7 @@ class RegisterController extends Controller
         return $this->validate($request, [
             'email' => ['required', 'email', ['exists', User::class]],
             'name' => ['required'],
-            'password' => ['required', ['lengthMIN', 8], ['password', $splitName[0], $splitName[1]]],
+            'password' => ['required', ['lengthMIN', 8]],
             'password_confirmation' => ['required', ['equals', 'password']]
         ]);
     }
