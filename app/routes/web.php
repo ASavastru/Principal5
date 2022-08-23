@@ -6,7 +6,11 @@ global $router;
 /** @var Container $container */
 global $container;
 
-use App\Controllers\{Auth\LoginController, Auth\LogoutController, Auth\RegisterController, HomeController};
+use App\Controllers\{Auth\LoginController,
+    Auth\LogoutController,
+    Auth\RegisterController,
+    CalendarController,
+    HomeController};
 use App\Middleware\{Authenticated, Guest};
 use League\{Container\Container, Route\RouteGroup, Route\Router};
 
@@ -15,6 +19,8 @@ use League\{Container\Container, Route\RouteGroup, Route\Router};
 $router->group('', function (RouteGroup $router) {
 
     $router->get('/', [HomeController::class, 'index'])->setName('home');
+
+    $router->get('/calendar', [CalendarController::class, 'index'])->setName('calendar');
 
     $router->post('/logout', [LogoutController::class, 'logout'])->setName('logout');
 

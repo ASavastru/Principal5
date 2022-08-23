@@ -1,0 +1,254 @@
+/*body {*/
+/*    display: flex;*/
+/*    margin-top: 120px;*/
+/*    justify-content: center;*/
+/*    font-family: TlwgTypewriter;*/
+/*    background-color: #f9f9f9;*/
+/*}*/
+
+button {
+    width: 90px;
+    cursor: pointer;
+    box-shadow: 0px 0px 5px #262f46;
+    border: none;
+    outline: none;
+    padding: 5px;
+    border-radius: 5px;
+    color: #f9f9f9;
+    background-color: #394770;
+}
+
+#header {
+    align-content: center;
+    padding: 10px;
+    color: #394770;
+    font-size: 30px;
+    font-family: sans-serif;
+    display: flex;
+    justify-content: space-between;
+}
+
+#header button {
+    background-color:#394770;
+}
+
+#container {
+    width: 770px;
+}
+
+#weekdays {
+    width: 100%;
+    display: flex;
+    font-size: 13px;
+    color: #394770;
+}
+
+#weekdays div {
+    width: 100px;
+    padding: 10px;
+    text-align: center;
+}
+
+#calendar {
+    align-content: center;
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.day {
+    width: 100px;
+    padding: 10px;
+    height: 90px;
+    cursor: pointer;
+    box-sizing: border-box;
+    background-color: #e2e5e8;
+    margin: 5px;
+    box-shadow: 0px 0px 3px #CBD4C2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition-duration: 0.3s;
+}
+
+.day:hover {
+    color: #f9f9f9;
+    background-color: #394770;
+    transition-duration: 0.4s;
+}
+
+#currentDay {
+    color: #f9f9f9;
+    background-color: #55669f;
+    transition-duration: 0.4s;
+}
+
+#currentDay:hover {
+    color: #f9f9f9;
+    background-color: #394770;
+    transition-duration: 0.4s;
+}
+
+#clickedDay {
+    color: #ffbfbf;
+    background-color: #8fa7da;
+    transition-duration: 0.4s;
+}
+
+#clickedDay:hover {
+    color: #ff8585;
+    background-color: #2b438a;
+    transition-duration: 0.4s;
+}
+
+.appointment {
+    font-size: 15px;
+    padding: 3px;
+    background-color: #ffb0b0;
+    color: #2b438a;
+    border-radius: 5px;
+    max-height: 55px;
+    overflow: hidden;
+}
+
+.padding {
+    cursor: default !important;
+    background-color: #f9f9f9 !important;
+    box-shadow: none !important;
+}
+
+#deleteAppointmentModal {
+    display: none;
+}
+
+#interstitialModal {
+    display: none;
+    z-index: 11; /*controls "depth" of modal*/
+    padding: 25px;
+    background-color: #f9f9f9;
+    color: #404d6c;
+    box-shadow: 0px 0px 3px #ffb4b4;
+    border-radius: 10px;
+    width: 186px;
+    height: 26px;
+    top: 440px;
+    left: calc(50% - 118px);
+    position: absolute;
+    font-family: TlwgTypewriter;
+}
+
+#newAppointmentModal {
+    display: none;
+    z-index: 11; /*controls "depth" of modal*/
+    padding: 25px;
+    background-color: #f9f9f9;
+    color: #404d6c;
+    box-shadow: 0px 0px 3px #ffb4b4;
+    border-radius: 10px;
+    width: 280px;
+    height: 200px;
+    top: 350px;
+    left: calc(50% - 165px);
+    position: absolute;
+    font-family: TlwgTypewriter;
+}
+
+#viewAppointmentsModal {
+    justify-content: center;
+    display: none;
+    z-index: 11; /*controls "depth" of modal*/
+    padding: 25px;
+    background-color: #f9f9f9;
+    color: #404d6c;
+    box-shadow: 0px 0px 3px #ffb4b4;
+    border-radius: 10px;
+    width: 280px;
+    height: 350px;
+    top: 250px;
+    left: calc(50% - 165px);
+    position: absolute;
+    font-family: TlwgTypewriter;
+    overflow-y: auto ;
+}
+
+#viewAppointmentsModal ul {
+    justify-content: center;
+    list-style: none;
+    padding: 0px 5px 0px 5px;
+    margin: 0px;
+}
+
+#viewAppointmentsModal ul li {
+    border-style: dotted;
+    border-width: thin;
+    border-color: #394770;
+    margin: 5px 0px 5px 0px;
+}
+
+#appointmentTitleInput {
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 25px;
+    border-radius: 3px;
+    outline: none;
+    border: none;
+    box-shadow: 0px 0px 3px gray;
+}
+
+#appointmentTitleInput.error {
+    border: solid red;
+}
+
+#cancelButton, #deleteButton, #saveButton, #closeButton {
+    display: none;
+    font-size: 15px;
+}
+
+#deleteButton, #closeButton {
+    top: calc(50% - 45px);
+    position: relative;
+}
+
+#saveButton, #cancelButton {
+    /*top: calc(50% - 75px);
+    position: absolute;*/
+
+    /*toMakePostiionAbsolute*/
+}
+
+#cancelButton, #deleteButton {
+    color: black;
+    background-color: #ff0000;
+}
+
+#saveButton, #closeButton {
+    color: #596c96;
+    background-color: #ffffff;
+}
+
+#appointmentText {
+    color: #404d6c;
+    font-size: 14px;
+}
+
+#modalBackDrop {
+    display: none;
+    top: 0px;
+    left: 0px;
+    z-index: 10;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+#hiddenForm {
+    visibility: hidden;
+    display: none;
+}
+
+#visibleForm {
+    visibility: visible;
+}

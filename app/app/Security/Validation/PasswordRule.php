@@ -7,8 +7,6 @@ class PasswordRule
     public function validate(string $field, string $value, array $params, array $fields): bool
     {
 
-//        dd($field, $value, $params, $fields);
-
         if($this->caseCheck($value) === false){
             return false;
         }

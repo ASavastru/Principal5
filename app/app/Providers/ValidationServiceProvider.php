@@ -32,8 +32,8 @@ class ValidationServiceProvider extends AbstractServiceProvider implements Boota
 
         Validator::addRule('password', function (string $field, string $value, array $params, array $fields) {
             return (new PasswordRule())->validate($field, $value, $params, $fields);
-        }, 'is invalid.');
+        }, 'Make sure the password has a mix of uppercase and lowercase characters as well as including numbers and special characters. Furthermore, you should not include your name in any variation.');
     }
 }
 
-#  \n Make sure the password has a mix of UPPERCASE and lowercase characters \n
+// viewer temporar pentru parola (cu ochisor)

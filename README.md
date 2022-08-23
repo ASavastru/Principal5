@@ -7,3 +7,7 @@ Commit #4:
             - must be alphanumeric (DONE)
             - must include at least one special character (DONE)
             - must not include separate first name and last name or their reversed forms (DONE)
+
+navigation
+home
+calendar

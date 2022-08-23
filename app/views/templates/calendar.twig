@@ -1,0 +1,64 @@
+{% extends 'templates/app.twig' %}
+
+{% block content %}
+    <head>
+        <link rel="stylesheet" href="/assets/Calendar.css">
+        <script src="/assets/script.js" defer></script>
+        {#    <script src="{{ asset("/assets/scripts/script.js") }}" defer></script>#}
+        <script src="https://momentjs.com/downloads/moment.min.js" defer></script>
+    </head>
+    <body>
+    <div id="container">
+
+        <div id="header">
+            <div id="monthDisplay"></div>
+            <div>
+                <button id="backButton">Back</button>
+                <button id="nextButton">Next</button>
+            </div>
+        </div>
+
+        <hr/>
+
+        <div id="weekdays">
+            <div>Monday</div>
+            <div>Tuesday</div>
+            <div>Wednesday</div>
+            <div>Thursday</div>
+            <div>Friday</div>
+            <div>Saturday</div>
+            <div>Sunday</div>
+        </div>
+
+        <hr/>
+
+        <div id="calendar"></div>
+
+        <hr/>
+
+        <div id="employees"></div>
+    </div>
+
+    <div id="newAppointmentModal">
+        <h2>New Appointment</h2>
+
+        <input id="appointmentTitleInput" placeholder="Appointment Title"/>
+
+        <button id="saveButton">Save</button>
+        <button id="cancelButton">Cancel</button>
+    </div>
+
+    <div id="deleteAppointmentModal">
+        <h2>Appointment</h2>
+
+        <p id="appointmentText"></p>
+
+        <button id="deleteButton">Delete</button>
+        <button id="closeButton">Close</button>
+    </div>
+
+    <div id="modalBackDrop"></div>
+
+    </body>
+    </html>
+{% endblock %}
