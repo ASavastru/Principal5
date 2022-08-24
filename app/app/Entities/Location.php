@@ -18,4 +18,7 @@ class Location extends BaseEntity
 
     #[ORM\Column(name: 'city', type: Types::STRING, length: 50, nullable: false)]
     protected string $city;
+
+    #[ORM\OneToMany(mappedBy: 'location', targetEntity: Appointment::class, fetch: 'EXTRA_LAZY')]
+    protected $appointments;
 }

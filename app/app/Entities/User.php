@@ -30,6 +30,6 @@ class User extends BaseEntity
     #[ORM\Column(name: 'remember_identifier', type: Types::STRING, length: 255, nullable: true)]
     protected string $remember_identifier;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Appointment::class)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Appointment::class, fetch: 'EXTRA_LAZY')]
     protected $appointments;
 }

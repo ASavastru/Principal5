@@ -14,13 +14,14 @@ use App\Controllers\{Auth\LoginController,
 use App\Middleware\{Authenticated, Guest};
 use League\{Container\Container, Route\RouteGroup, Route\Router};
 
-
 // Routes that need authentication in order to access
 $router->group('', function (RouteGroup $router) {
 
     $router->get('/', [HomeController::class, 'index'])->setName('home');
 
-    $router->get('/calendar', [CalendarController::class, 'index'])->setName('calendar');
+    $router->get('/calendar-get', [CalendarController::class, 'index'])->setName('calendar');
+
+    $router->post('/calendar-post', [CalendarController::class, 'createAppointment']);
 
     $router->post('/logout', [LogoutController::class, 'logout'])->setName('logout');
 
@@ -28,6 +29,8 @@ $router->group('', function (RouteGroup $router) {
 
 // Routes that can be accessed only if the user is NOT authenticated
 $router->group('', function (RouteGroup $router) {
+
+//    $router->post('/calendar', [CalendarController::class, 'createAppointment']);
 
     $router->get('/login', [LoginController::class, 'index'])->setName('login');
 

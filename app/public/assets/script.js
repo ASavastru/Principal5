@@ -1,4 +1,7 @@
 let nav = 0;
+let params = new URLSearchParams(document.location.search);
+let insertedDate = params.get("insertedDate");
+document.getElementById('insertedDate2').setAttribute('value', insertedDate);
 //Tracks clicks for prevMonth and nextMonth with increments
 
 let clicked = null;
@@ -116,7 +119,7 @@ function load() {
             // shows appointment
 
             daySquare.addEventListener('click', () => {
-                // openModal(dayString))
+                // openModal(dayString);
                 let x = moment(momentDayString).format('YYYY-MM-DD');
                 document.getElementById('insertedDate').value = x;
                 document.getElementById('getDataFromDatabase').submit();

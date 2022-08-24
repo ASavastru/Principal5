@@ -8,63 +8,103 @@
         <script src="https://momentjs.com/downloads/moment.min.js" defer></script>
     </head>
     <body>
-    <div id="container">
+    <section id="page" style="display: flex; justify-content: space-evenly">
+        <section>
+            <div id="container">
 
-        <div id="header">
-            <div id="monthDisplay"></div>
-            <div>
-                <button id="backButton">Back</button>
-                <button id="nextButton">Next</button>
+                <div id="header">
+                    <div id="monthDisplay"></div>
+                    <div>
+                        <button id="backButton">Back</button>
+                        <button id="nextButton">Next</button>
+                    </div>
+                </div>
+                <hr/>
+                <div id="weekdays">
+                    <div>Monday</div>
+                    <div>Tuesday</div>
+                    <div>Wednesday</div>
+                    <div>Thursday</div>
+                    <div>Friday</div>
+                    <div>Saturday</div>
+                    <div>Sunday</div>
+                </div>
+                <hr/>
+                <div id="calendar"></div>
             </div>
-        </div>
 
-        <hr/>
+            {#    <div id="newAppointmentModal">#}
+            {#        <h2>New Appointment</h2>#}
 
-        <div id="weekdays">
-            <div>Monday</div>
-            <div>Tuesday</div>
-            <div>Wednesday</div>
-            <div>Thursday</div>
-            <div>Friday</div>
-            <div>Saturday</div>
-            <div>Sunday</div>
-        </div>
+            {#        <input id="appointmentTitleInput" placeholder="Appointment Title"/>#}
 
-        <hr/>
+            {#        <button id="saveButton">Save</button>#}
+            {#        <button id="cancelButton">Cancel</button>#}
+            {#    </div>#}
+            {#    <div id="deleteAppointmentModal">#}
+            {#        <h2>Appointment</h2>#}
 
-        <div id="calendar"></div>
+            {#        <p id="appointmentText"></p>#}
 
-        <hr/>
+            {#        <button id="deleteButton">Delete</button>#}
+            {#        <button id="closeButton">Close</button>#}
+            {#    </div>#}
+            {#    <div id="modalBackDrop"></div>#}
+            {#    <div>#}
+            <div id="interstitialModal">
+                <button id="createAppointment">Create New</button>
+                <button id="viewAppointment">View</button>
+            </div>
 
-        <div id="employees"></div>
-    </div>
+            <div style="display: none" id="storeDate"></div>
 
-    <div id="newAppointmentModal">
-        <h2>New Appointment</h2>
+            <div id="newAppointmentModal">
+                <h2>New Appointment</h2>
+                <form method="post" id="visibleForm">
+                    <input type="number" id="userId" name="userId"></br>
+                    <input type="number" id="locationId" name="locationId"></br>
+                    <input type="submit" id="submitAppointmentInformation"></br>
+                    {#            <input type="hidden" id="insertedDate" name="insertedDate"></br>#}
+                    <input type="hidden" id="checkViewOrCreate" name="checkViewOrCreate">
+                    <input type="hidden" name="action" value="setAppointment">
+                </form>
+                <button id="saveButton">Save</button>
+                <button id="cancelButton">Cancel</button>
+            </div>
 
-        <input id="appointmentTitleInput" placeholder="Appointment Title"/>
+            <div id="deleteAppointmentModal">
+                <h2>Appointment</h2>
 
-        <button id="saveButton">Save</button>
-        <button id="cancelButton">Cancel</button>
-    </div>
+                <p id="appointmentText"></p>
 
-    <div id="deleteAppointmentModal">
-        <h2>Appointment</h2>
+                <button id="deleteButton">Delete</button>
+                <button id="closeButton">Close</button>
+            </div>
 
-        <p id="appointmentText"></p>
-
-        <button id="deleteButton">Delete</button>
-        <button id="closeButton">Close</button>
-    </div>
-
-    <div id="modalBackDrop"></div>
-
-    <div>
-        <form method="get" id="getDataFromDatabase">
-            <input type="text" id="insertedDate" name="insertedDate"></br>
-        </form>
-    </div>
-    {{ dump() }}
+            <div id="modalBackDrop"></div>
+            <form method="get" action="/calendar-get" id="getDataFromDatabase">
+                <input type="text" id="insertedDate" name="insertedDate"></br>
+            </form>
+            </div>
+            <div>
+                <form method="post" action="/calendar-post" id="postAppointmentDataToDatabase">
+                    <button type="submit">AA</button></br>
+                    <input type="text" id="location_id" name="location_id"></br>
+                    <input type="hidden" id="insertedDate2" name="insertedDate"></br>
+                    <input type="hidden" name="{{ constant('SESSION_KEY', csrf) }}" value="{{ csrf.token }}">
+                </form>
+            </div>
+        </section>
+        <section id="">
+            <div>
+                {% for appointment in appointments %}
+                    <div>{{ appointment.user.name }}</div>
+                    <div>{{ appointment.location.city }}</div>
+                {% endfor %}
+            </div>
+        </section>
+    </section>
+    {{ dump(appointment) }}
     </body>
     </html>
 {% endblock %}

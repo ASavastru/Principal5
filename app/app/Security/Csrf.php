@@ -10,7 +10,7 @@ class Csrf
 {
     public const SESSION_KEY = '_token';
 
-    protected bool $persistToken = false;
+    protected bool $persistToken = true;
 
     public function __construct(protected SessionStore $session)
     {

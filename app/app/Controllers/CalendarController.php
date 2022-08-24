@@ -14,18 +14,37 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class CalendarController
 {
-    public function __construct(protected View $view, protected EntityManager $db)
+    public function __construct(protected View $view, protected EntityManager $db, protected Auth $auth)
     {
     }
 
     public function index(ServerRequestInterface $request): ResponseInterface
     {
-        $insertedDate = $request->getQueryParams()['insertedDate'];
-        $appointments = $this->db->getRepository(Appointment::class)->matching(
-            Criteria::create()->where(Criteria::expr()->eq('date', new \DateTime($insertedDate)))
-        )->getValues();
-
-        dd($appointments[0]->getUser());
+        $insertedDate = $request->getQueryParams()['insertedDate'] ?? false;
+        if($insertedDate){
+            $appointments = $this->db->getRepository(Appointment::class)->matching(
+                Criteria::create()->where(Criteria::expr()->eq('date', new \DateTime($insertedDate)))
+            )->getValues();
+//            dd($appointments);
+            return $this->view->render(new Response, 'templates/calendar.twig', ["appointments"=>$appointments]);
+        }
         return $this->view->render(new Response, 'templates/calendar.twig');
+    }
+
+    public function createAppointment(ServerRequestInterface $request): ResponseInterface
+    {
+        dd($request);
+        $appointment = new Appointment();
+
+        $appointment->fill([
+            'user' => $this->auth->user(),
+            'location' => /* find by id */ ,
+            'date' => $request->getParsedBody()['insertedDate']
+        ]);
+
+        $this->db->persist($appointment);
+        $this->db->flush();
+
+        return $appointment;
     }
 }

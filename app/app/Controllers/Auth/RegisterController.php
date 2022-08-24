@@ -4,7 +4,13 @@ declare(strict_types=1);
 
 namespace App\Controllers\Auth;
 
-use App\{Auth\Auth, Auth\Hashing\Hasher, Controllers\Controller, Entities\User, Session\Flash, Views\View};
+use App\{Auth\Auth,
+    Auth\Hashing\Hasher,
+    Controllers\Controller,
+    Entities\Appointment,
+    Entities\User,
+    Session\Flash,
+    Views\View};
 use Doctrine\ORM\EntityManager;
 use Laminas\Diactoros\Response;
 use League\Route\Router;
@@ -54,13 +60,15 @@ class RegisterController extends Controller
         return $user;
     }
 
+
+
     private function validateRegistration(ServerRequestInterface $request): array
     {
         $splitName = explode(' ', $request->getParsedBody()['name'],PHP_INT_MAX);
         return $this->validate($request, [
             'email' => ['required', 'email', ['exists', User::class]],
             'name' => ['required'],
-            'password' => ['required', ['lengthMIN', 8]],
+            'password' => ['required', ['lengthMIN', 8], ['password', $splitName[0], $splitName[1]]],
             'password_confirmation' => ['required', ['equals', 'password']]
         ]);
     }
