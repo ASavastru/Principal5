@@ -30,18 +30,15 @@ class CalendarController
         ]);
         $insertedDate = $request->getQueryParams()['insertedDate'] ?? false;
         if(isset($insertedDate)){
-//            $appointments = $this->db->getRepository(Appointment::class)->matching(
-//                Criteria::create()->where(Criteria::expr()->eq('date', new \DateTime($insertedDate)))
-//            )->getValues();
             $appointments = $this->db->getRepository(Appointment::class)->findBy([
                 'date' => new \DateTime($insertedDate),
-                'location' => $request->getQueryParams()['locationFilterGet'], // make into variable
+                'location' => $request->getQueryParams()['locationFilterGet'],
             ]);
-            //when logging in, lines 36->39 must be commented
+            //when clicking on calendar from home, lines 36->39 must be commented
 
             return $this->view->render(new Response, 'templates/calendar.twig',
                 [
-                    "appointments"=>$appointments, //when logging in, must be commented
+                    "appointments"=>$appointments, //when clicking on calendar from home, must be commented
                     "locations"=>$locations,
                     "defaultLocation"=>$defaultLocation
                 ]);
@@ -55,11 +52,6 @@ class CalendarController
 
     public function createAppointment(ServerRequestInterface $request): ResponseInterface
     {
-//        dd($request);
-//        $defaultLocation = $this->db->getRepository(Location::class)->findOneBy([
-//            'id' => $request->getParsedBody()['locationFilter'] ?? "1",
-//        ]);
-
         $location = $this->db->getRepository(Location::class)->findOneBy([
             'id' => $request->getParsedBody()['locationFilter']
         ]); // pulls locations
