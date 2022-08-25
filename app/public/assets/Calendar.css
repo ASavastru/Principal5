@@ -257,5 +257,14 @@ button {
     border: solid;
     border-color: #2b438a;
     display: flex;
+}
 
+#makeAppointment {
+    background-color: #262f46;
+    color: #f9f9f9
+}
+
+#makeAppointment:hover {
+    background-color: #262f46;
+    color: #f9f9f9;
 }

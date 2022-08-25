@@ -35,12 +35,13 @@ class CalendarController
 //            )->getValues();
             $appointments = $this->db->getRepository(Appointment::class)->findBy([
                 'date' => new \DateTime($insertedDate),
-                'location' => $request->getQueryParams()['locationFilterGet'],
+                'location' => $request->getQueryParams()['locationFilterGet'], // make into variable
             ]);
+            //when logging in, lines 36->39 must be commented
 
             return $this->view->render(new Response, 'templates/calendar.twig',
                 [
-                    "appointments"=>$appointments,
+                    "appointments"=>$appointments, //when logging in, must be commented
                     "locations"=>$locations,
                     "defaultLocation"=>$defaultLocation
                 ]);
@@ -63,6 +64,15 @@ class CalendarController
             'id' => $request->getParsedBody()['locationFilter']
         ]); // pulls locations
         $appointment = new Appointment();
+
+        $sameDayValidator = $this->db->getRepository(Appointment::class)->count([
+            'user' => $this->auth->user(),
+            'date' => \DateTime::createFromFormat('Y-m-d', $request->getParsedBody()['insertedDate']),
+        ]);
+
+        if($sameDayValidator > 0){
+            return new Response\JsonResponse("You already have an appointment for " . $request->getParsedBody()['insertedDate'] . " " . $sameDayValidator);
+        }
 
         $appointment->fill([
             'user' => $this->auth->user(), // ??

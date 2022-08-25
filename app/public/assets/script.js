@@ -1,4 +1,5 @@
 let nav = 0;
+//localStorage.getItem('navigator') || 0
 let params = new URLSearchParams(document.location.search);
 let insertedDate = params.get("insertedDate");
 document.getElementById('insertedDate2').setAttribute('value', insertedDate);
@@ -128,6 +129,7 @@ function load() {
                 // openModal(dayString);
                 let x = moment(momentDayString).format('YYYY-MM-DD');
                 document.getElementById('insertedDate').value = x;
+                document.getElementById("locationFilterGet").value = document.getElementById('locationDropdown').value;
                 document.getElementById('getDataFromDatabase').submit();
             });
             // listens for clicks on each div
@@ -225,12 +227,14 @@ function deleteAppointment() {
 function initButtons() {
     document.getElementById("nextButton").addEventListener('click', () => {
         nav++;
+        localStorage.setItem('navigator', nav);
         load();
     });
     // increments nav on nextButton click and reloads page to display next month
 
     document.getElementById("backButton").addEventListener('click', () => {
         nav--;
+        localStorage.setItem('navigator', nav);
         load();
     });
     // decrements nav on backButton click and reloads page to display previous month
@@ -246,6 +250,7 @@ function initButtons() {
     document.getElementById('locationDropdown').addEventListener('click', function (){
         document.getElementById('locationFilterGet').value = document.getElementById('locationDropdown').value;
     });
+    // console.log(document.getElementById('locationDropdown').value)
     //gives location filter from GET form the value from the dropdown so it can be used to filter shown appointments
 
     document.getElementById('deleteButton').addEventListener('click', deleteAppointment);

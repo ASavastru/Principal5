@@ -1,21 +1,18 @@
 {% extends 'templates/app.twig' %}
-
 {% block content %}
     <head>
         <script src="https://momentjs.com/downloads/moment.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script src="/assets/script.js" defer></script>
         <link rel="stylesheet" href="/assets/Calendar.css">
-        {#    <script src="{{ asset("/assets/scripts/script.js") }}" defer></script>#}
     </head>
     <body>
     <div id="makeAppointment">
-        Make Appointment With Get
+        Make Appointment
     </div>
     <section id="page" style="display: flex; justify-content: space-evenly">
         <section>
             <div id="container">
-
                 <div id="header">
                     <div id="monthDisplay"></div>
                     <div>
@@ -36,32 +33,11 @@
                 <hr/>
                 <div id="calendar"></div>
             </div>
-
-            {#    <div id="newAppointmentModal">#}
-            {#        <h2>New Appointment</h2>#}
-
-            {#        <input id="appointmentTitleInput" placeholder="Appointment Title"/>#}
-
-            {#        <button id="saveButton">Save</button>#}
-            {#        <button id="cancelButton">Cancel</button>#}
-            {#    </div>#}
-            {#    <div id="deleteAppointmentModal">#}
-            {#        <h2>Appointment</h2>#}
-
-            {#        <p id="appointmentText"></p>#}
-
-            {#        <button id="deleteButton">Delete</button>#}
-            {#        <button id="closeButton">Close</button>#}
-            {#    </div>#}
-            {#    <div id="modalBackDrop"></div>#}
-            {#    <div>#}
             <div id="interstitialModal">
                 <button id="createAppointment">Create New</button>
                 <button id="viewAppointment">View</button>
             </div>
-
             <div style="display: none" id="storeDate"></div>
-
             <div id="newAppointmentModal">
                 <h2>New Appointment</h2>
                 <form method="post" id="visibleForm">
@@ -75,16 +51,12 @@
                 <button id="saveButton">Save</button>
                 <button id="cancelButton">Cancel</button>
             </div>
-
             <div id="deleteAppointmentModal">
                 <h2>Appointment</h2>
-
                 <p id="appointmentText"></p>
-
                 <button id="deleteButton">Delete</button>
                 <button id="closeButton">Close</button>
             </div>
-
             <div id="modalBackDrop"></div>
             <form method="get" action="/calendar" id="getDataFromDatabase">
                 <input type="text" id="insertedDate" name="insertedDate"></br>
