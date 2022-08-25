@@ -2,12 +2,16 @@
 
 {% block content %}
     <head>
-        <link rel="stylesheet" href="/assets/Calendar.css">
+        <script src="https://momentjs.com/downloads/moment.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script src="/assets/script.js" defer></script>
+        <link rel="stylesheet" href="/assets/Calendar.css">
         {#    <script src="{{ asset("/assets/scripts/script.js") }}" defer></script>#}
-        <script src="https://momentjs.com/downloads/moment.min.js" defer></script>
     </head>
     <body>
+    <div id="makeAppointment">
+        Make Appointment With Get
+    </div>
     <section id="page" style="display: flex; justify-content: space-evenly">
         <section>
             <div id="container">
@@ -82,20 +86,30 @@
             </div>
 
             <div id="modalBackDrop"></div>
-            <form method="get" action="/calendar-get" id="getDataFromDatabase">
+            <form method="get" action="/calendar" id="getDataFromDatabase">
                 <input type="text" id="insertedDate" name="insertedDate"></br>
+                <input type="hidden" id="locationFilterGet" name="locationFilterGet"></br>
             </form>
             </div>
             <div>
-                <form method="post" action="/calendar-post" id="postAppointmentDataToDatabase">
-                    <button type="submit">AA</button></br>
-                    <input type="text" id="location_id" name="location_id"></br>
+                <form method="post" action="/calendar" id="postAppointmentDataToDatabase">
+                    <select id="locationDropdown" name="locationDropdown">
+                        {{ dump(defaultLocation) }}
+                        {% for location in locations %}
+                            {% if(location.id == defaultLocation.id | number_format) %}
+                                <option value="{{ location.id }}" selected>{{ location.city }}</option>
+                            {% else %}
+                                <option value="{{ location.id }}">{{ location.city }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
                     <input type="hidden" id="insertedDate2" name="insertedDate"></br>
-                    <input type="hidden" name="{{ constant('SESSION_KEY', csrf) }}" value="{{ csrf.token }}">
+                    <input type="hidden" id="token" name="{{ constant('SESSION_KEY', csrf) }}" value="{{ csrf.token }}">
+{#                    <input type="hidden" id="locationFilter" name="locationFilter"></br>#}
                 </form>
             </div>
         </section>
-        <section id="">
+        <section id="existingAppointmentsContainer">
             <div>
                 {% for appointment in appointments %}
                     <div>{{ appointment.user.name }}</div>
@@ -104,7 +118,6 @@
             </div>
         </section>
     </section>
-    {{ dump(appointment) }}
     </body>
     </html>
 {% endblock %}

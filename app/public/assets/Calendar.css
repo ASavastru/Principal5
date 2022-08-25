@@ -252,3 +252,10 @@ button {
 #visibleForm {
     visibility: visible;
 }
+
+#existingAppointmentsContainer {
+    border: solid;
+    border-color: #2b438a;
+    display: flex;
+
+}

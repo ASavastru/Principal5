@@ -19,9 +19,10 @@ $router->group('', function (RouteGroup $router) {
 
     $router->get('/', [HomeController::class, 'index'])->setName('home');
 
-    $router->get('/calendar-get', [CalendarController::class, 'index'])->setName('calendar');
+    $router->get('/calendar', [CalendarController::class, 'index'])->setName('calendar');
 
-    $router->post('/calendar-post', [CalendarController::class, 'createAppointment']);
+//    $router->post('/calendar', [CalendarController::class, 'createAppointment']);
+    $router->post('/makeAppointment', [CalendarController::class, 'createAppointment']);
 
     $router->post('/logout', [LogoutController::class, 'logout'])->setName('logout');
 

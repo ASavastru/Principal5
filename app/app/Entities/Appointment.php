@@ -16,7 +16,6 @@ class Appointment extends BaseEntity
     protected int $id;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'appointments', fetch: 'EXTRA_LAZY')]
-    // fetch should be EXTRA_LAZY instead of EAGER, but it doesn't show User data in var_dump($appointments);
     #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
     protected User $user;
 

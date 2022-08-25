@@ -98,14 +98,20 @@ function load() {
             daySquare.innerText = i - paddingDays;
             // renders the day in the div
 
+            daySquare.setAttribute("data-date", moment(momentDayString).format('YYYY-MM-DD'));
+
             const appointmentForDay = appointments.find(e => e.date === dayString);
             // checks if there is an appointment in the day
             // and adds it to appointmentForDay
 
             if ( i - paddingDays === day && nav === 0 ) {
-                daySquare.id = 'currentDay';
+                // daySquare.id = 'currentDay';
             }
             // checks for current day and applies styling to it
+
+            if ( insertedDate == daySquare.getAttribute('data-date')){
+                daySquare.id = 'currentDay';
+            }
 
             if(appointmentForDay) {
                 const appointmentDiv = document.createElement('div');
@@ -132,9 +138,22 @@ function load() {
             // this makes sure that it doesn't have the
             // same style as a daySquare
         }
-
         calendar.appendChild(daySquare);
     }
+}
+
+ajaxAxios(insertedDate);
+
+function ajaxAxios(date) {
+    document.getElementById('makeAppointment').addEventListener('click', e => {
+        const data = new FormData();
+        data.set("insertedDate", moment(date).format('YYYY-MM-DD'))
+        data.set("locationFilter", document.getElementById('locationDropdown').value)
+        data.set('_token', document.getElementById('token').value)
+        axios.post("/makeAppointment", data).then(function(response){
+            console.log(response.data)
+        })
+    })
 }
 
 function openModal(date) {
@@ -223,6 +242,11 @@ function initButtons() {
         //eliminates error style when cancelButton isClicked
         closeModal();
     });
+
+    document.getElementById('locationDropdown').addEventListener('click', function (){
+        document.getElementById('locationFilterGet').value = document.getElementById('locationDropdown').value;
+    });
+    //gives location filter from GET form the value from the dropdown so it can be used to filter shown appointments
 
     document.getElementById('deleteButton').addEventListener('click', deleteAppointment);
 

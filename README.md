@@ -1,8 +1,3 @@
 # Principal Projects - 5Th Week
 
-Commit #5:
-        -
-
-
-Appointment entity
-Calendar Controller
+Gets Appointments, Makes Appointments, Has a smidge of AJAX, idk how it works anymore but it does.
